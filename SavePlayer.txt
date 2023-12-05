@@ -1,0 +1,8 @@
+IDV,      ID Doi,   Ten doi,       ID CT,    Goal      
+1,        1,        Viet Nam 1,    1,        1         
+1,        1,        Viet Nam 1,    2,        1         
+1,        15,       Nhat Ban,      11,       1         
+1,        2,        Thailand,      3,        2         
+1,        5,        Japan,         9,        1         
+2,        2,        Thailand,      3,        2         
+2,        3,        Campuchia,     5,        3         

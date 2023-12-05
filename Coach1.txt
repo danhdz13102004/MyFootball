@@ -1,0 +1,8 @@
+ID,            Ten HLV,       Ngay sinh,     Dia chi,            Tuoi,     Ten doi bong  
+10,            Ngo Van Danh 1,01/02/2001,    Phu Ning,           22,       Viet Nam 1          
+12,            Ngo Van Danh 2,12/04/2008,    Duy Xuyen,          15,       ThaiLand            
+13,            Ngo Van Danh 3,13/02/2009,    Tam Ky,             14,       Campuchia           
+14,            VIET NAM,      07/08/2003,    Thuy Si,            20,       Lao                 
+15,            Ngo Van Danh 5,01/02/2007,    Que Phu,            16,       Japan               
+16,            Ngo Van Danh 6,01/02/2012,    Que Xuan,           11,       Nhat Ban
+17,            Ngo Van Danh 7,03/02/2008,    ALO,                15,       Uc             

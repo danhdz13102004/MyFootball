@@ -1,0 +1,9 @@
+ID,       Ten Doi Bong,       So Cau Thu,         Ten HLV,       Ban Thang,     Ban Thua,      Hieu So,       Diem,          Thu hang           
+1,        Viet Nam 1,         2,                  Ngo Van Danh 1,3,             2,             1,             3,             1              
+2,        ThaiLand,           2,                  Ngo Van Danh 2,0,             0,             0,             0,             1              
+3,        Campuchia,          2,                  Ngo Van Danh 3,0,             0,             0,             0,             1              
+4,        Lao,                2,                  VIET NAM,      0,             0,             0,             0,             1              
+5,        Japan,              2,                  Ngo Van Danh 5,0,             0,             0,             0,             1              
+15,       Nhat Ban,           2,                  Ngo Van Danh 6,2,             3,            -1,             0,             1              
+7,        Uc,                 1,                  Ngo Van Danh 7,0,             0,             0,             0,             1                      
+            
