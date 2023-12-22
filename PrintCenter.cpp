@@ -47,27 +47,35 @@ String drawOption(String opt, int size)
    opt = opt + tmp + "|";
    return opt;
 }
-String drawOptionCenter(String opt,int size) {
+String drawOptionCenter(String opt, int size)
+{
    int spaceNeed = size - opt.size() - 2;
-   opt =  opt;
+   opt = opt;
    String tmp;
-   for(int i=1;i<=spaceNeed/2;i++) tmp = tmp + " ";
-   opt =String("|") + tmp + opt;
-   if(spaceNeed%2 != 0) tmp = tmp + " ";
+   for (int i = 1; i <= spaceNeed / 2; i++)
+      tmp = tmp + " ";
+   opt = String("|") + tmp + opt;
+   if (spaceNeed % 2 != 0)
+      tmp = tmp + " ";
    opt = opt + tmp + String("|");
    return opt;
 }
-String addSpace(String s1,String s2,int size) {
+String addSpace(String s1, String s2, int size)
+{
    int spaceNeeds = size - s1.size() - s2.size();
-   if(spaceNeeds <= 0) return s1 + s2;
+   if (spaceNeeds <= 0)
+      return s1 + s2;
    String tmp;
-   for(int i=1;i<=spaceNeeds;i++) {
-      tmp  = tmp + " ";
+   for (int i = 1; i <= spaceNeeds; i++)
+   {
+      tmp = tmp + " ";
    }
    return s1 + tmp + s2;
 }
-void printFullScreen(char c) {
+void printFullScreen(char c)
+{
    int screenWidth = getConsoleWidth();
-   for(int i=1;i<=screenWidth;i++) cout << c;
+   for (int i = 1; i <= screenWidth; i++)
+      cout << c;
    cout << endl;
 }

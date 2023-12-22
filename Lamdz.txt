@@ -1,3 +1,0 @@
-ID        Ten cau thu    Ngay sinh      Dia chi             Tuoi      So ao          The vang       The do    Ban thang Ten doi bong        
-13,       Tran Vu Lam 13,01/02/2002,    VN,                 21,       13,            0,             0,        -1,       Uc                      
-1,        Tran Vu Lam 1, 01/01/2000,    Da Nang,            23,       1,             0,             0,        1,        Viet Nam 1          

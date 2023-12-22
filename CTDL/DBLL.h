@@ -1,18 +1,17 @@
-// File DBLL.h
 #include <iostream>
 #include "node.h"
 using namespace std;
 #ifndef LLDB_H
 #define LLDB_H
 template <typename T>
+
 class DBLL
 {
 private:
     node<T> *head = NULL;
     node<T> *tail = NULL;
-    // int size;
+
 public:
-    // template <typename T>
     DBLL();
     ~DBLL();
     node<T> *makenode(T); // tao node
@@ -26,20 +25,14 @@ public:
     void duyetxuoi();     // duyet danh sach theo chieu xuoi
     void duyetnguoc();
     T &operator[](int);
-    // duyet danh sach theo chieu nguoc
-    // void sort(node<T>*);       //sap xep danh sach
-    // friend ostream& operator<<(ostream&, const node*);
-    // friend istream& operator>>(istream&, node*);
 };
 template <typename T>
 DBLL<T>::DBLL()
 {
-    // cout << "Constructor of DBLL" << endl;
 }
 template <typename T>
 DBLL<T>::~DBLL()
 {
-    // cout << "Destructor of DBLL" << endl;
 }
 
 template <typename T>
@@ -63,6 +56,7 @@ node<T> *DBLL<T>::makenode(T x)
     node<T> *new_node = new node<T>(x);
     return new_node;
 }
+
 template <typename T>
 int DBLL<T>::size()
 {
@@ -124,6 +118,7 @@ void DBLL<T>::insert(int k, T x)
         new_node->prev = tmp;
     }
 }
+
 template <typename T>
 void DBLL<T>::delete_fr()
 {
@@ -135,6 +130,7 @@ void DBLL<T>::delete_fr()
         head->prev = NULL;
     delete (tmp);
 }
+
 template <typename T>
 void DBLL<T>::delete_b()
 {
@@ -152,6 +148,7 @@ void DBLL<T>::delete_b()
     tmp->prev->next = NULL;
     delete (tmp);
 }
+
 template <typename T>
 void DBLL<T>::erase(int k)
 {
@@ -170,16 +167,18 @@ void DBLL<T>::erase(int k)
         delete (tmp);
     }
 }
+
 template <typename T>
 void DBLL<T>::duyetxuoi()
 {
     node<T> *tmp = this->head;
     while (tmp != NULL)
     {
-        cout << tmp->data; 
+        cout << tmp->data;
         tmp = tmp->next;
     }
 }
+
 template <typename T>
 void DBLL<T>::duyetnguoc()
 {
@@ -190,7 +189,7 @@ void DBLL<T>::duyetnguoc()
         tmp = tmp->next;
     while (tmp != NULL)
     {
-        cout << tmp->data; 
+        cout << tmp->data;
         tmp = tmp->prev;
     }
 }

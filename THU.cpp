@@ -14,9 +14,8 @@ using namespace std;
 
 main()
 {
-    for(int i = 0; i < 15; i++)
-    {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), i);
-        cout << "hihi" << endl;
-    }
+    Coach c;
+    String t = c.changeCoach();
+    c.dkcDeleteCoach(t, c.returnnameCoach(t));
 }
+

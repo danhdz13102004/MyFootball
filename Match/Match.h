@@ -54,6 +54,7 @@ public:
     bool checkidPlayerofTeam(String, String);
     void showdate();
     void showschedule();
-    Match getMatchFromHistoryMatch(String,String,String);
+    void findallmatch();
+    Match getMatchFromHistoryMatch(String, String, String);
 };
 #endif

@@ -30,10 +30,11 @@ public:
     void showdateHM();
     void showidHM();
     void showidvongHM();
-    Vector<int> duyetsaveplayer();
+    Vector<int> duyetsaveplayer(String, String);
+    String showPlayerandgoalinsaveplayer(String, String);
     void chuyenhoa(String, String);
     void deleterPlayerafterchuyenhoa(String);
-    static bool checkHistoryMatchExist(String,String,String);
-    static void resetPointOfTeamAndDelelteHistoryMatch(String,String,String);
-    static void resetGoalOfPlayerAndDeleteSavePlayer(String,String,String);
+    static bool checkHistoryMatchExist(String, String, String);
+    static void resetPointOfTeamAndDelelteHistoryMatch(String, String, String);
+    static void resetGoalOfPlayerAndDeleteSavePlayer(String, String, String);
 };

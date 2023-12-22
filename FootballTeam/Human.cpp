@@ -83,16 +83,16 @@ void Human::setAge(int age)
     this->age = age;
 }
 
-//int Human::string_to_int(String x)
+// int Human::string_to_int(String x)
 //{
-//    char a[x.size()];
-//    for (int i = 0; i < x.size(); i++)
-//    {
-//        a[i] = x[i];
-//    }
-//    return atoi(a);
-//}
-// 13/10/2004
+//     char a[x.size()];
+//     for (int i = 0; i < x.size(); i++)
+//     {
+//         a[i] = x[i];
+//     }
+//     return atoi(a);
+// }
+//  13/10/2004
 
 void Human::setAgeByDateOfBirth(String date)
 {
@@ -133,4 +133,3 @@ void Human::setAgeByDateOfBirth(String date)
         }
     }
 }
-

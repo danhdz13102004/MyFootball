@@ -1,4 +1,5 @@
 #include "Human.h"
+#include "../CTDL/Vector.h"
 #include <fstream>
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -34,15 +35,17 @@ public:
     static bool cmp(Player, Player);
     static void sortAllPlayer();
     static void updatePlayerAfterMatch(String, int, int, int);
-    //void dkcDeleteTeam(String);
+    // void dkcDeleteTeam(String);
     void deletePlayerById();
     void dkcdeletePlayer(String);
     void addPlayerFromFile();
-    friend ostream& operator<<(ostream&, const Player&);
+    friend ostream &operator<<(ostream &, const Player &);
     void showPlayer();
     void showKing();
+    Vector<String> nameKing();
     void showNamePlayer();
     void showIDPlayer();
-    void resetPlayer(String,int);
+    void resetPlayer(String, int);
+    String getnamebyid(String id);
 };
 #endif

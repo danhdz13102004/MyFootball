@@ -4,8 +4,8 @@
 #include <fstream>
 #include "Algorithm.h"
 #include <iomanip>
-//#include "main.cpp"
-// #include "LapLich/Algorithm.cpp"
+// #include "main.cpp"
+//  #include "LapLich/Algorithm.cpp"
 using namespace std;
 
 class Date_Time
@@ -33,10 +33,14 @@ public:
             String tmp('0');
             minute = tmp + minute;
         }
-        if(dt.day < 10) newday = String("0") + String::tostring(dt.day);
-        else newday = String::tostring(dt.day);
-        if(dt.month < 10) newmonth = String("0") + String::tostring(dt.month);
-        else newmonth = String::tostring(dt.month);
+        if (dt.day < 10)
+            newday = String("0") + String::tostring(dt.day);
+        else
+            newday = String::tostring(dt.day);
+        if (dt.month < 10)
+            newmonth = String("0") + String::tostring(dt.month);
+        else
+            newmonth = String::tostring(dt.month);
         if (dt.hour == 15 || dt.hour == 17)
             o << left << dt.hour << "h" << setw(17) << minute + ",";
         else
@@ -166,7 +170,7 @@ void Doi_Chan(int a[], int size)
 }
 void Doi_Le(int a[], int size)
 {
-    int* b = new int[size + 1]; 
+    int *b = new int[size + 1];
     for (int i = size - 1; i >= 0; i--)
     {
         b[i + 1] = a[i];
@@ -175,7 +179,7 @@ void Doi_Le(int a[], int size)
 
     Doi_Chan(b, size + 1);
 
-    delete[] b; 
+    delete[] b;
 }
 
 void writetofile(ofstream &o, int check)
@@ -198,7 +202,6 @@ void writetofile(ofstream &o, int check)
 
 void func()
 {
-    //cout << "Lap lich thanh cong!" << endl;
     ofstream outFile("Schedule.txt");
     int size = 0;
     Vector<int> v;
@@ -210,10 +213,12 @@ void func()
         while (!inf.eof())
         {
             String::getline(inf, tmp);
-            if(tmp[0] == ' ' || tmp.size() <=1 || tmp[0] == '\n') {
+            if (tmp[0] == ' ' || tmp.size() <= 1 || tmp[0] == '\n')
+            {
                 break;
             }
-            if(tmp[0] != ' ') size++;
+            if (tmp[0] != ' ')
+                size++;
             String myId;
             for (int i = 0; i < tmp.size(); i++)
             {
@@ -224,30 +229,32 @@ void func()
             v.push_back(String::toint(myId));
         }
     }
-    //int a[size];
-    int* a = new int[size];
+    int *a = new int[size];
     for (int i = 0; i < size; i++)
         a[i] = v[i];
-    // 1 10 2 3 4 5 6 7 8 9
     int day, m, y;
-    cout << "CREATE A NEW LEAGUE/Schedule matches" << endl << endl;
-    cout << "Enter the start time.\n";
+    // cout << "CREATE A NEW LEAGUE/Schedule matches" << endl
+    //      << endl;
+    cout << "Enter the start time and location.\n";
     cout << "Enter the day: ";
     cin >> day;
     cout << "Enter the month: ";
     cin >> m;
     cout << "Enter the year: ";
     cin >> y;
+    cout << "Enter the location: ";
     cin.ignore();
+    String diadiem;
+    String::getline(cin, diadiem);
+    if ((!((y % 4 == 0 && y % 100 != 0) || y % 400 == 0) && day == 29 && m == 2) || m > 12 || day > 31)
+    {
+        cout << "Match scheduling failed!" << endl;
+        return;
+    }
     streambuf *coutbuf = cout.rdbuf();
     cout.rdbuf(outFile.rdbuf());
     writetofile(outFile, 1);
-    if ((!((y % 4 == 0 && y % 100 != 0) || y % 400 == 0) && day == 29 && m == 2) || m > 12 || day > 31)
-    {
-        cout << "=> default";
-        return;
-    }
-    Date_Time d1(0, 7, day, m, y, "Dai hoc Bach Khoa Da Nang");
+    Date_Time d1(0, 7, day, m, y, diadiem);
     d = d1;
     // int size = sizeof(a) / sizeof(int);
     if (size % 2 == 0)

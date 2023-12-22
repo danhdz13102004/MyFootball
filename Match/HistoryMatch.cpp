@@ -22,7 +22,7 @@ void HistoryMatch::showHistoryMatch()
     ifstream file("HistoryMatch.txt");
     String tmp;
     String::getline(file, tmp);
-    cout << left << setw(7) << "Vong" << setw(10) << "ID doi 1" << setw(17) << "Ten doi 1" << setw(17) << "Ban thang doi 1" << setw(12) << "ID doi 2" << setw(17) << "Ten doi 2" << setw(17) << "Ban thang doi 2" << setw(17) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
+    // cout << left << setw(7) << "Vong" << setw(10) << "ID doi 1" << setw(17) << "Ten doi 1" << setw(17) << "Ban thang doi 1" << setw(12) << "ID doi 2" << setw(17) << "Ten doi 2" << setw(17) << "Ban thang doi 2" << setw(17) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
     while (!file.eof())
     {
         String::getline(file, tmp);
@@ -64,24 +64,27 @@ void HistoryMatch::showHistoryMatch()
                     break;
             }
         }
+        Player p;
         Team t;
-        String n1, n2;
+        String n1, n2, tmp2, tmp4;
         n1 = t.nameTeambyId(id1);
         n2 = t.nameTeambyId(id2);
-        cout << left << setw(7) << idr << setw(10) << id1 << setw(17) << n1 << setw(17) << goal1 << setw(12) << id2 << setw(17) << n2 << setw(17) << goal2 << setw(17) << time << setw(20) << date << setw(20) << address << endl;
-        // cout << idr << ", " << id1 << ", " << goal1 << ", " << id2 << "," << goal2 << "," << time << ", " << date << ", " << address << endl;
+        String tmp1("Location: ");
+        String tmp3("Number round: ");
+        tmp2 = tmp1 + address;
+        tmp4 = tmp3 + idr;
+        String tmp5("-");
+        this_thread::sleep_for(chrono::milliseconds(100));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        printCentered(tmp4);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        printCentered(drawBorder(60));
+        printCentered(drawOptionCenter(addSpace(n1, n2, 32), 60));
+        printCentered(drawOptionCenter(addSpace(goal1, tmp5 + goal2, 3), 60));
+        printCentered(drawOptionCenter(tmp2, 60));
+        printCentered(drawBorder(60));
+        cout << endl;
     }
-    // system("cls");
-    // Team t, t1, t2;
-    // t1 = t.getTeamById(this->getIdTeam1());
-    // t2 = t.getTeamById(this->getIdTeam2());
-    // cout << "QUAN LY GIAI DAU/Truy van thong tin lich su tran dau" << endl
-    //      << endl;
-    // cout << "Vong dau so: " << this->getIdRound() << endl;
-    // cout << left << setw(30) << t1.getNameFootballTeam() << setw(15) << this->numGoalTeam1 << setw(15) << "-" << setw(50) << this->numGoalTeam2 << t2.getNameFootballTeam() << endl;
-    // cout << "Ngay thi dau: " << this->getDate() << endl;
-    // cout << "Dia chi thi dau: " << this->getAddress() << endl;
-    // getchar();
 }
 
 void HistoryMatch::saveHistoryMatchToFile(ofstream &o)
@@ -178,7 +181,7 @@ String HistoryMatch::getGoal(String ma)
 {
     ifstream file("Team.txt");
     String tmp;
-    String notf = "Khong tim thay";
+    String notf = "Not found";
     String::getline(file, tmp);
     while (!file.eof())
     {
@@ -233,7 +236,7 @@ String HistoryMatch::getLostGoal(String ma)
 {
     ifstream file("Team.txt");
     String tmp;
-    String notf = "Khong tim thay";
+    String notf = "Not found";
     String::getline(file, tmp);
     while (!file.eof())
     {
@@ -353,14 +356,14 @@ void HistoryMatch::updatePoint(String ma, String diem)
         rename("tempTeam.txt", "Team.txt");
     }
     else
-        cout << "Khong mo dc file";
+        cout << "Failed";
 }
 
 String HistoryMatch::getPoint(String ma)
 {
     ifstream file("Team.txt");
     String tmp;
-    String notf = "Khong tim thay";
+    String notf = "Not found";
     String::getline(file, tmp);
     while (!file.eof())
     {
@@ -414,7 +417,7 @@ String HistoryMatch::getPoint(String ma)
 String HistoryMatch::getbanthangbyPlayertxt(String ma)
 {
     ifstream i("Player.txt");
-    String notf = "Khong tim thay";
+    String notf = "Not found";
     if (i.is_open())
     {
         String tmp;
@@ -475,7 +478,7 @@ String HistoryMatch::getbanthangbyPlayertxt(String ma)
 String HistoryMatch::getgoalSavePlayer(String idv, String idct)
 {
     ifstream sp("SavePlayer.txt");
-    String notf = "Khong tim thay";
+    String notf = "Not found";
     if (sp.is_open())
     {
         String tmp;
@@ -584,7 +587,7 @@ void HistoryMatch::editSavePlayer(String idv, String idct, String Goal)
         rename("tempSavePlayer.txt", "SavePlayer.txt");
     }
     else
-        cout << "Khong mo dc file";
+        cout << "Failed";
 }
 
 void HistoryMatch::editGoalPlayertxt(String idct, String Goal)
@@ -655,10 +658,64 @@ void HistoryMatch::editGoalPlayertxt(String idct, String Goal)
         rename("tempPlayer.txt", "Player.txt");
     }
     else
-        cout << "Khong mo dc file";
+        cout << "Failed";
 }
 
-Vector<int> HistoryMatch::duyetsaveplayer()
+String HistoryMatch::showPlayerandgoalinsaveplayer(String idv, String idt)
+{
+    String notf = "Not found";
+    ifstream sp("SavePlayer.txt");
+    if (sp.is_open())
+    {
+        String tmp;
+        String::getline(sp, tmp);
+        while (!sp.eof())
+        {
+            String::getline(sp, tmp);
+            if (tmp[0] == ' ' || tmp.size() <= 1 || tmp[0] == '\n')
+            {
+                break;
+            }
+            int check = 1;
+            bool status = false;
+            String idround, idteam, tenteam, idplayer, banthangg;
+            for (int i = 0; i < tmp.size(); i++)
+            {
+                if (tmp[i] != ' ')
+                    status = true;
+                if (tmp[i] == ',')
+                {
+                    status = false;
+                    check++;
+                    continue;
+                }
+                if (check == 1 && status)
+                    idround = idround + tmp[i];
+                else if (check == 2 && status)
+                    idteam = idteam + tmp[i];
+                else if (check == 3 && status)
+                    tenteam = tenteam + tmp[i];
+                else if (check == 4 && status)
+                    idplayer = idplayer + tmp[i];
+                else if (check == 5 && status && tmp[i] != '\n')
+                {
+                    banthangg = banthangg + tmp[i];
+                    if ((tmp[i + 1] == ' ' && tmp[i + 2] == ' ') || (tmp[i + 1] == ' ' && i + 1 == tmp.size() - 1))
+                        break;
+                }
+            }
+            if (idv == idround && idt == idteam)
+            {
+                sp.close();
+                return idplayer;
+            }
+        }
+    }
+    sp.close();
+    return notf;
+}
+
+Vector<int> HistoryMatch::duyetsaveplayer(String idv, String idt)
 {
     Vector<int> b;
     ifstream sp("SavePlayer.txt");
@@ -701,14 +758,17 @@ Vector<int> HistoryMatch::duyetsaveplayer()
                         break;
                 }
             }
-            b.push_back(String::toint(idplayer));
+            if (idv == idround && idt == idteam)
+            {
+                b.push_back(String::toint(idplayer));
+            }
         }
     }
     sp.close();
     return b;
 }
 
-Vector<int> HistoryMatch::entergoal(String idvong, String id1, String id2, int g1, int g2)
+/* Vector<int> HistoryMatch::entergoal(String idvong, String id1, String id2, int g1, int g2)
 {
     Vector<int> a;
     int index = 0;
@@ -809,9 +869,9 @@ Vector<int> HistoryMatch::entergoal(String idvong, String id1, String id2, int g
     }
     Player::sortAllPlayer();
     return a;
-}
+} */
 
-void HistoryMatch::chuyenhoa(String idct, String Goal)
+/* void HistoryMatch::chuyenhoa(String idct, String Goal)
 {
     fstream file("Player.txt", ios::in);
     fstream tempFile("Lamdz.txt", ios::out | ios::app);
@@ -876,9 +936,9 @@ void HistoryMatch::chuyenhoa(String idct, String Goal)
     }
     else
         cout << "Khong mo dc file";
-}
+} */
 
-void HistoryMatch::updateHistoryMatch()
+/* void HistoryMatch::updateHistoryMatch()
 {
     bool kt = true;
     int c[50];
@@ -973,24 +1033,24 @@ void HistoryMatch::updateHistoryMatch()
                         int intbanthang1 = String::toint(banthang1);
                         int intbanthang2 = String::toint(banthang2);
                         HistoryMatch h;
-                        Vector<int> a = h.entergoal(idvong, idm, idh, intbanthang1, intbanthang2);  //những thằng được update lưu vô đây, đồng thời đã update xong bên file Player.txt, sai trường hợp đang có bàn thắng thành 0 có bàn thắng nào
-                        Vector<int> b = h.duyetsaveplayer();    //những thằng trước khi update được lưu vô đây
+                        Vector<int> a = h.entergoal(idvong, idm, idh, intbanthang1, intbanthang2); // những thằng được update lưu vô đây, đồng thời đã update xong bên file Player.txt, sai trường hợp đang có bàn thắng thành 0 có bàn thắng nào
+                        Vector<int> b = h.duyetsaveplayer();                                       // những thằng trước khi update được lưu vô đây
                         for (int i = 0; i < b.size(); i++)
                         {
                             if (a.find(b[i]) == -1)
                             {
-                                c[index] = b[i];    //những thằng đang có bàn thắng thành 0 có bàn thắng nào được lưu vô đây
+                                c[index] = b[i]; // những thằng đang có bàn thắng thành 0 có bàn thắng nào được lưu vô đây
                                 index++;
                             }
                         }
                         for (int i = 0; i < index; i++)
                         {
                             int result = String::toint(getbanthangbyPlayertxt(String::tostring(c[i]))) - String::toint(getgoalSavePlayer(idvong, String::tostring(c[i])));
-                            chuyenhoa(String::tostring(c[i]), String::tostring(result));    //đã cập nhật lại bàn thắng những thằng đang có bàn thắng thành 0 có bàn thắng nào ra file Lamdz.txt
+                            chuyenhoa(String::tostring(c[i]), String::tostring(result)); // đã cập nhật lại bàn thắng những thằng đang có bàn thắng thành 0 có bàn thắng nào ra file Lamdz.txt
                             // làm thế nào để xóa tất cả những cầu thủ có ID là c[i] trong file Player.txt, xong rồi thêm những thằng bên file Lamdz.txt qua là xong
                         }
-                        //gọi hàm sort để sort lại file Player.txt sau khi thêm những thằng bên file Lamdz.txt qua
-                        //tới đây cập nhật lại thằng SavePlayer.txt sau khi update là xong
+                        // gọi hàm sort để sort lại file Player.txt sau khi thêm những thằng bên file Lamdz.txt qua
+                        // tới đây cập nhật lại thằng SavePlayer.txt sau khi update là xong
                         if (intgoal1 > intgoal2)
                         {
                             if (intbanthang1 > intbanthang2)
@@ -1157,177 +1217,206 @@ void HistoryMatch::updateHistoryMatch()
         cout << "Khong tim thay tran dau nao!" << endl;
     else
         cout << "Cap nhat thong tin thanh cong!" << endl;
-}
+} */
 
-void HistoryMatch::updateHistoryMatch1() {
+void HistoryMatch::updateHistoryMatch1()
+{
     showHistoryMatch();
-    String idRound,nameTeam1,nameTeam2,id1,id2;
+    String idRound, tmpnameTeam1, tmpnameTeam2, nameTeam1, nameTeam2, id1, id2;
     cout << "Enter ID Round: ";
-    String::getline(cin,idRound);
+    String::getline(cin, idRound);
     cout << "Enter Name Team 1: ";
-    String::getline(cin,nameTeam1);
+    String::getline(cin, tmpnameTeam1);
     cout << "Enter Name Team 2: ";
-    String::getline(cin,nameTeam2);
+    String::getline(cin, tmpnameTeam2);
     Team t;
+    nameTeam1 = String::standadizeString(tmpnameTeam1);
+    nameTeam2 = String::standadizeString(tmpnameTeam2);
     id1 = t.getIdByNameTeam(nameTeam1);
     id2 = t.getIdByNameTeam(nameTeam2);
-    if(HistoryMatch::checkHistoryMatchExist(idRound,id1,id2)) {
-    Match m = Match::getMatchFromHistoryMatch(idRound, id1, id2);
-    HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(idRound,id1,id2);
-    HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(idRound,id1,id2);
-    const int maxplayer = 100;
-    int goalsByPlayer[maxplayer][2];
-    for (int i = 0; i < maxplayer; ++i)
+    if (HistoryMatch::checkHistoryMatchExist(idRound, id1, id2))
     {
-        goalsByPlayer[i][0] = 0;
-        goalsByPlayer[i][1] = 0;
-    }
-    int lc;
-    int g1, g2;
-    cout << "Nhap so ban thang cua doi thu nhat: ";
-    cin >> g1;
-    cout << "Nhap so ban thang cua doi thu hai: ";
-    cin >> g2;
-    cin.ignore();
-    String idm, idh, goal1, goal2;
-    cout << "Danh sach cau thu cua doi bong co ID la " << id1 << " (" << nameTeam1 << ")" << endl;
-    showPlayerofTeam(nameTeam1);
-    cout << endl;
-    cout << "Danh sach cau thu cua doi bong co ID la " << id2 << " (" << nameTeam2 << ")" << endl;
-    showPlayerofTeam(nameTeam2);
-    int kiemtra = 0;
-    int sum = g1 + g2;
-    int dem1 = 0, dem2 = 0;
-    cout << "Luu y: So ban thang cho tung cau thu phai bang tong so ban thang cua 2 doi da ghi ban trong tran dau!" << endl;
-    int goal1Int, goal2Int;
-    ofstream f("SavePlayer.txt", std::ios::app);
-    do
-    {
-        if (g1 > 0 && dem1 < g1)
+        Match m = Match::getMatchFromHistoryMatch(idRound, id1, id2);
+        HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(idRound, id1, id2);
+        HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(idRound, id1, id2);
+        const int maxplayer = 100;
+        int goalsByPlayer[maxplayer][2];
+        for (int i = 0; i < maxplayer; ++i)
         {
-            do
+            goalsByPlayer[i][0] = 0;
+            goalsByPlayer[i][1] = 0;
+        }
+        int lc;
+        int g1, g2;
+        cout << endl;
+        cout << "Enter the goal of team 1: ";
+        cin >> g1;
+        cout << "Enter the goal of team 2: ";
+        cin >> g2;
+        cin.ignore();
+        String idm, idh, goal1, goal2;
+        cout << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+        printCentered(drawBorder(202));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        cout << "List of team's players with ID " << id1 << " (" << nameTeam1 << ")" << endl;
+        showPlayerofTeam(nameTeam1);
+        cout << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+        printCentered(drawBorder(202));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        cout << "List of team's players with ID " << id2 << " (" << nameTeam2 << ")" << endl;
+        showPlayerofTeam(nameTeam2);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+        printCentered(drawBorder(202));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        int kiemtra = 0;
+        int sum = g1 + g2;
+        int dem1 = 0, dem2 = 0;
+        cout << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+        cout << "Note: The number of goals for each player must be equal to the total number of goals scored by the two teams in the match!" << endl
+             << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        int goal1Int, goal2Int;
+        ofstream f("SavePlayer.txt", std::ios::app);
+        do
+        {
+            if (g1 > 0 && dem1 < g1)
             {
-                cout << "Nhap ID cau thu ghi ban cho doi " << nameTeam2 << ": ";
-                String::getline(cin, idm);
-                if (checkidPlayerofTeam(id1, idm))
+                do
                 {
-                    cout << "Nhap so ban thang (toi da " << g1 - dem1 << " ban): ";
-                    String::getline(cin, goal1);
-                    goal1Int = String::toint(goal1);
-
-                    if (goal1Int <= g1 - dem1 && goal1Int >= 0)
+                    cout << "Enter the citizen identification card of the player who scored a goal for the " << nameTeam1 << ": ";
+                    String::getline(cin, idm);
+                    if (checkidPlayerofTeam(id1, idm))
                     {
-                        dem1 += goal1Int;
-                        kiemtra += goal1Int;
-                        goalsByPlayer[String::toint(idm)][0] += goal1Int;
-                        // goalsByPlayer[{id1, idm}] += goal1Int;
+                        cout << "Enter the goal (Maximum " << g1 - dem1 << " goal): ";
+                        String::getline(cin, goal1);
+                        goal1Int = String::toint(goal1);
+
+                        if (goal1Int <= g1 - dem1 && goal1Int >= 0)
+                        {
+                            dem1 += goal1Int;
+                            kiemtra += goal1Int;
+                            goalsByPlayer[String::toint(idm)][0] += goal1Int;
+                            // goalsByPlayer[{id1, idm}] += goal1Int;
+                        }
+                        else
+                        {
+                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                            cout << "The number of goals entered is invalid. Please re-enter." << endl;
+                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+                        }
                     }
                     else
                     {
-                        cout << "So ban thang nhap vao khong hop le. Vui long nhap lai." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        cout << "Players have citizen identification cards " << idm << " not found " << nameTeam1 << ". Please re-enter." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                     }
-                }
-                else
-                {
-                    cout << "Cau thu co ID " << idm << " khong ton tai trong doi bong " << nameTeam1 << ". Vui long nhap lai." << endl;
-                }
-            } while (!checkidPlayerofTeam(id1, idm));
-            // for (const auto &entry : goalsByPlayer)
-            // {
-            //     const auto &playerKey = entry.first;
-            //     const String &teamId = playerKey.first;
-            //     const String &playerId = playerKey.second;
-            //     int goalsScored = entry.second;
-            //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
-            //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
-            // }
-        }
+                } while (!checkidPlayerofTeam(id1, idm));
+                // for (const auto &entry : goalsByPlayer)
+                // {
+                //     const auto &playerKey = entry.first;
+                //     const String &teamId = playerKey.first;
+                //     const String &playerId = playerKey.second;
+                //     int goalsScored = entry.second;
+                //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
+                //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
+                // }
+            }
 
-        if (g2 > 0 && dem2 < g2)
-        {
-            do
+            if (g2 > 0 && dem2 < g2)
             {
-                cout << "Nhap ID cau thu ghi ban cho doi " << nameTeam2 << ": ";
-                String::getline(cin, idh);
-                if (checkidPlayerofTeam(id2, idh))
+                do
                 {
-                    cout << "Nhap so ban thang (toi da " << g2 - dem2 << " ban): ";
-                    String::getline(cin, goal2);
-                    goal2Int = String::toint(goal2);
-
-                    if (goal2Int <= g2 - dem2 && goal2Int >= 0)
+                    cout << "Enter the citizen identification card of the player who scored a goal for the " << nameTeam2 << ": ";
+                    String::getline(cin, idh);
+                    if (checkidPlayerofTeam(id2, idh))
                     {
-                        dem2 += goal2Int;
-                        kiemtra += goal2Int;
-                        goalsByPlayer[String::toint(idh)][1] += goal2Int;
-                        // goalsByPlayer[{id2, idh}] += goal2Int;
+                        cout << "Enter the goal (Maximum " << g2 - dem2 << " goal): ";
+                        String::getline(cin, goal2);
+                        goal2Int = String::toint(goal2);
+
+                        if (goal2Int <= g2 - dem2 && goal2Int >= 0)
+                        {
+                            dem2 += goal2Int;
+                            kiemtra += goal2Int;
+                            goalsByPlayer[String::toint(idh)][1] += goal2Int;
+                            // goalsByPlayer[{id2, idh}] += goal2Int;
+                        }
+                        else
+                        {
+                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                            cout << "The number of goals entered is invalid. Please re-enter." << endl;
+                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+                        }
                     }
                     else
                     {
-                        cout << "So ban thang nhap vao khong hop le. Vui long nhap lai." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        cout << "Players have citizen identification cards " << idh << " not found " << nameTeam2 << ". Please re-enter." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                     }
-                }
-                else
-                {
-                    cout << "Cau thu co ID " << idh << " khong ton tai trong doi bong " << nameTeam2 << ". Vui long nhap lai." << endl;
-                }
-            } while (!checkidPlayerofTeam(id2, idh));
-            // for (const auto &entry : goalsByPlayer)
-            // {
-            //     const auto &playerKey = entry.first;
-            //     const String &teamId = playerKey.first;
-            //     const String &playerId = playerKey.second;
-            //     int goalsScored = entry.second;
-            //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
-            //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
-            // }
-        }
-    } while (kiemtra != sum);
-    for (int i = 0; i < maxplayer; ++i)
-    {
-        if (goalsByPlayer[i][0] > 0 || goalsByPlayer[i][1] > 0)
+                } while (!checkidPlayerofTeam(id2, idh));
+                // for (const auto &entry : goalsByPlayer)
+                // {
+                //     const auto &playerKey = entry.first;
+                //     const String &teamId = playerKey.first;
+                //     const String &playerId = playerKey.second;
+                //     int goalsScored = entry.second;
+                //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
+                //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
+                // }
+            }
+        } while (kiemtra != sum);
+        for (int i = 0; i < maxplayer; ++i)
         {
-            int m = max(goalsByPlayer[i][0], goalsByPlayer[i][1]);
-            cout << "Cau thu co ID " << i << " ghi duoc " << m << " ban thang." << endl;
-            if (checkidPlayerofTeam(id1, String::tostring(i)) == true)
-                f << left << setw(10) << idRound + "," << setw(10) << id1 + "," << setw(15) << returnNameTeamByID(id1) + "," << setw(10) << String::tostring(i) + "," << setw(10) << String::tostring(m) << endl;
-            else
-                f << left << setw(10) << idRound + "," << setw(10) << id2 + "," << setw(15) << returnNameTeamByID(id2) + "," << setw(10) << String::tostring(i) + "," << setw(10) << String::tostring(m) << endl;
-            Player::updatePlayerAfterMatch(String::tostring(i), 0, 0, m);
+            if (goalsByPlayer[i][0] > 0 || goalsByPlayer[i][1] > 0)
+            {
+                int m = max(goalsByPlayer[i][0], goalsByPlayer[i][1]);
+                Player p;
+                cout << "Players have name " << p.getnamebyid(String::tostring(i)) << " score " << m << " goal." << endl;
+                if (checkidPlayerofTeam(id1, String::tostring(i)) == true)
+                    f << left << setw(10) << idRound + "," << setw(10) << id1 + "," << setw(15) << returnNameTeamByID(id1) + "," << setw(10) << String::tostring(i) + "," << setw(10) << String::tostring(m) << endl;
+                else
+                    f << left << setw(10) << idRound + "," << setw(10) << id2 + "," << setw(15) << returnNameTeamByID(id2) + "," << setw(10) << String::tostring(i) + "," << setw(10) << String::tostring(m) << endl;
+                Player::updatePlayerAfterMatch(String::tostring(i), 0, 0, m);
+            }
         }
-    }
-    Player::sortAllPlayer();
-    Team t;
-    if (g1 > g2)
-    {
-        t.updateTeamAfterMatch(id1, g1, g2, 3);
-        t.updateTeamAfterMatch(id2, g2, g1, 0);
-        t.sortRankAllTeam();
-    }
-    else if (g1 < g2)
-    {
-        t.updateTeamAfterMatch(id1, g1, g2, 0);
-        t.updateTeamAfterMatch(id2, g2, g1, 3);
-        t.sortRankAllTeam();
+        Player::sortAllPlayer();
+        Team t;
+        if (g1 > g2)
+        {
+            t.updateTeamAfterMatch(id1, g1, g2, 3);
+            t.updateTeamAfterMatch(id2, g2, g1, 0);
+            t.sortRankAllTeam();
+        }
+        else if (g1 < g2)
+        {
+            t.updateTeamAfterMatch(id1, g1, g2, 0);
+            t.updateTeamAfterMatch(id2, g2, g1, 3);
+            t.sortRankAllTeam();
+        }
+        else
+        {
+            t.updateTeamAfterMatch(id1, g1, g2, 1);
+            t.updateTeamAfterMatch(id2, g2, g1, 1);
+            t.sortRankAllTeam();
+        }
+        m.deleteMatchByIdRoundAndTwoTeam(m);
+        m.saveToHistoryMatch(id1, id2, g1, g2);
+        cout << "Press the Enter key to continue . .";
+        getchar();
     }
     else
     {
-        t.updateTeamAfterMatch(id1, g1, g2, 1);
-        t.updateTeamAfterMatch(id2, g2, g1, 1);
-        t.sortRankAllTeam();
-    }
-    m.deleteMatchByIdRoundAndTwoTeam(m);
-    m.saveToHistoryMatch(id1, id2, g1, g2);
-    cout << "Nhan Enter de tiep tuc . .";
-    getchar();
-    }
-    else {
         cout << "No matches could be found!" << endl;
         return;
     }
-    
 }
-void HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(String idRound,String idTeam1,String idTeam2) {
+void HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(String idRound, String idTeam1, String idTeam2)
+{
     ifstream file("HistoryMatch.txt");
     ofstream o("Tmp1.txt");
     String tmp;
@@ -1374,15 +1463,19 @@ void HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(String idRound,String 
                     break;
             }
         }
-        if(idRound == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1)){
+        if (idRound == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1))
+        {
             Team t;
-            t.resetInforOfTeam(id1,String::toint(goal1),String::toint(goal2));
-            t.resetInforOfTeam(id2,String::toint(goal2),String::toint(goal1));
+            t.resetInforOfTeam(id1, String::toint(goal1), String::toint(goal2));
+            t.resetInforOfTeam(id2, String::toint(goal2), String::toint(goal1));
         }
-        else {
-            o << endl << left << setw(15) << idr + "," << setw(20) << id1 + "," << setw(20) << goal1 + "," << setw(20) << id2 + "," << setw(20) << goal2 + "," << setw(20) << time + "," << setw(25) << date + "," << setw(20) << address;
+        else
+        {
+            o << endl
+              << left << setw(15) << idr + "," << setw(20) << id1 + "," << setw(20) << goal1 + "," << setw(20) << id2 + "," << setw(20) << goal2 + "," << setw(20) << time + "," << setw(25) << date + "," << setw(20) << address;
         }
-        cout << endl << left << setw(15) << idr + "," << setw(20) << id1 + "," << setw(20) << goal1 + "," << setw(20) << id2 + "," << setw(20) << goal2 + "," << setw(20) << time + "," << setw(25) << date + "," << setw(20) << address;
+        // cout << endl
+        //      << left << setw(15) << idr + "," << setw(20) << id1 + "," << setw(20) << goal1 + "," << setw(20) << id2 + "," << setw(20) << goal2 + "," << setw(20) << time + "," << setw(25) << date + "," << setw(20) << address;
     }
     o.close();
     file.close();
@@ -1391,7 +1484,8 @@ void HistoryMatch::resetPointOfTeamAndDelelteHistoryMatch(String idRound,String 
     remove(i1);
     rename(tmp1, "HistoryMatch.txt");
 }
-void HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(String idRound,String idTeam1,String idTeam2) {
+void HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(String idRound, String idTeam1, String idTeam2)
+{
     ifstream sp("SavePlayer.txt");
     ofstream o("Tmp2.txt");
     Player p;
@@ -1435,10 +1529,12 @@ void HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(String idRound,String id
                         break;
                 }
             }
-            if((idRound == idround) && (idteam == idTeam1 || idteam == idTeam2)) {
-                p.resetPlayer(idplayer,String::toint(banthangg));
+            if ((idRound == idround) && (idteam == idTeam1 || idteam == idTeam2))
+            {
+                p.resetPlayer(idplayer, String::toint(banthangg));
             }
-            else {
+            else
+            {
                 o << left << setw(10) << idround + "," << setw(10) << idteam + "," << setw(15) << tenteam + "," << setw(10) << idplayer + "," << setw(10) << banthangg << endl;
             }
         }
@@ -1449,10 +1545,10 @@ void HistoryMatch::resetGoalOfPlayerAndDeleteSavePlayer(String idRound,String id
     const char *tmp1("Tmp2.txt");
     remove(i1);
     rename(tmp1, "SavePlayer.txt");
-
 }
- 
-bool HistoryMatch::checkHistoryMatchExist(String idR,String idTeam1,String idTeam2) {
+
+bool HistoryMatch::checkHistoryMatchExist(String idR, String idTeam1, String idTeam2)
+{
     ifstream file("HistoryMatch.txt");
     String tmp;
     String::getline(file, tmp);
@@ -1497,7 +1593,8 @@ bool HistoryMatch::checkHistoryMatchExist(String idR,String idTeam1,String idTea
                     break;
             }
         }
-        if(idR == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1)){
+        if (idR == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1))
+        {
             return true;
         }
     }
@@ -1735,22 +1832,35 @@ void HistoryMatch::showHMbydate(String ntn)
         }
         if (ntn == date)
         {
-            if (kt == 1)
-            {
-                cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
-                kt++;
-            }
-            // cout << check;
+            this_thread::sleep_for(chrono::milliseconds(100));
             kq = false;
+            Player p;
             Team t;
-            String n1, n2;
+            String n1, n2, tmp2, tmp4;
             n1 = t.nameTeambyId(id1);
             n2 = t.nameTeambyId(id2);
-            cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            String tmp1("Location: ");
+            String tmp3("Number round: ");
+            tmp2 = tmp1 + address;
+            tmp4 = tmp3 + idr;
+            String tmp5("-");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+            printCentered(tmp4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printCentered(drawBorder(60));
+            printCentered(drawOptionCenter(addSpace(n1, n2, 32), 60));
+            printCentered(drawOptionCenter(addSpace(goal1, tmp5 + goal2, 3), 60));
+            printCentered(drawOptionCenter(tmp2, 60));
+            printCentered(drawBorder(60));
+            cout << endl;
         }
     }
     if (kq)
-        cout << "Khong tim thay!" << endl;
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found!" << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
 }
 
 void HistoryMatch::showHMbyidoneteam(String ma)
@@ -1799,21 +1909,45 @@ void HistoryMatch::showHMbyidoneteam(String ma)
         }
         if (ma == id1 || ma == id2)
         {
-            if (kt == 1)
-            {
-                cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
-                kt++;
-            }
+            // if (kt == 1)
+            // {
+            //     cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
+            //     kt++;
+            // }
+            // kq = false;
+            // Team t;
+            // String n1, n2;
+            // n1 = t.nameTeambyId(id1);
+            // n2 = t.nameTeambyId(id2);
+            // cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            Player p;
             kq = false;
             Team t;
-            String n1, n2;
+            String n1, n2, tmp2, tmp4;
             n1 = t.nameTeambyId(id1);
             n2 = t.nameTeambyId(id2);
-            cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            String tmp1("Location: ");
+            String tmp3("Number round: ");
+            tmp2 = tmp1 + address;
+            tmp4 = tmp3 + idr;
+            String tmp5("-");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+            printCentered(tmp4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printCentered(drawBorder(60));
+            printCentered(drawOptionCenter(addSpace(n1, n2, 32), 60));
+            printCentered(drawOptionCenter(addSpace(goal1, tmp5 + goal2, 3), 60));
+            printCentered(drawOptionCenter(tmp2, 60));
+            printCentered(drawBorder(60));
+            cout << endl;
         }
     }
     if (kq)
-        cout << "Khong tim thay!" << endl;
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found!" << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
 }
 
 void HistoryMatch::showHMbyidtwoteam(String ma1, String ma2)
@@ -1862,21 +1996,46 @@ void HistoryMatch::showHMbyidtwoteam(String ma1, String ma2)
         }
         if ((ma1 == id1 && ma2 == id2) || (ma2 == id1 && ma1 == id2))
         {
-            if (kt == 1)
-            {
-                cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
-                kt++;
-            }
-            kq = false;
+            // if (kt == 1)
+            // {
+            //     cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
+            //     kt++;
+            // }
+            // kq = false;
+            // Team t;
+            // String n1, n2;
+            // n1 = t.nameTeambyId(id1);
+            // n2 = t.nameTeambyId(id2);
+            // cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            Player p;
+            this_thread::sleep_for(chrono::milliseconds(100));
             Team t;
-            String n1, n2;
+            kq = false;
+            String n1, n2, tmp2, tmp4;
             n1 = t.nameTeambyId(id1);
             n2 = t.nameTeambyId(id2);
-            cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            String tmp1("Location: ");
+            String tmp3("Number round: ");
+            tmp2 = tmp1 + address;
+            tmp4 = tmp3 + idr;
+            String tmp5("-");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+            printCentered(tmp4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printCentered(drawBorder(60));
+            printCentered(drawOptionCenter(addSpace(n1, n2, 32), 60));
+            printCentered(drawOptionCenter(addSpace(goal1, tmp5 + goal2, 3), 60));
+            printCentered(drawOptionCenter(tmp2, 60));
+            printCentered(drawBorder(60));
+            cout << endl;
         }
     }
     if (kq)
-        cout << "Khong tim thay!" << endl;
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found!" << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
 }
 
 void HistoryMatch::showHMbyidround(String idvong)
@@ -1925,19 +2084,44 @@ void HistoryMatch::showHMbyidround(String idvong)
         }
         if (idvong == idr)
         {
-            if (kt == 1)
-            {
-                cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
-                kt++;
-            }
+            // if (kt == 1)
+            // {
+            //     cout << left << setw(10) << "Vong" << setw(15) << "ID doi 1" << setw(20) << "Ten doi 1" << setw(20) << "Ban thang doi 1" << setw(15) << "ID doi 2" << setw(20) << "Ten doi 2" << setw(20) << "Ban thang doi 2" << setw(12) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
+            //     kt++;
+            // }
+            // kq = false;
+            // Team t;
+            // String n1, n2;
+            // n1 = t.nameTeambyId(id1);
+            // n2 = t.nameTeambyId(id2);
+            // cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            Player p;
+            this_thread::sleep_for(chrono::milliseconds(100));
             kq = false;
             Team t;
-            String n1, n2;
+            String n1, n2, tmp2, tmp4;
             n1 = t.nameTeambyId(id1);
             n2 = t.nameTeambyId(id2);
-            cout << left << setw(10) << idr << setw(15) << id1 << setw(20) << n1 << setw(20) << goal1 << setw(15) << id2 << setw(20) << n2 << setw(20) << goal2 << setw(12) << time << setw(20) << date << setw(20) << address << endl;
+            String tmp1("Location: ");
+            String tmp3("Number round: ");
+            tmp2 = tmp1 + address;
+            tmp4 = tmp3 + idr;
+            String tmp5("-");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+            printCentered(tmp4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printCentered(drawBorder(60));
+            printCentered(drawOptionCenter(addSpace(n1, n2, 32), 60));
+            printCentered(drawOptionCenter(addSpace(goal1, tmp5 + goal2, 3), 60));
+            printCentered(drawOptionCenter(tmp2, 60));
+            printCentered(drawBorder(60));
+            cout << endl;
         }
     }
     if (kq)
-        cout << "Khong tim thay!" << endl;
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found!" << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
 }

@@ -41,10 +41,10 @@ public:
         {
             if (this->p[i] == value)
             {
-                return i; // Phần tử được tìm thấy, trả về vị trí của nó
+                return i;
             }
         }
-        return -1; // Phần tử không được tìm thấy
+        return -1;
     }
 };
 
@@ -131,7 +131,6 @@ template <typename T>
 void Vector<T>::clear()
 {
     delete[] this->p;
-    // this->p = nullptr;
     this->n = 0;
 }
 
@@ -157,8 +156,4 @@ void Vector<T>::operator=(const Vector &v)
     }
 }
 
-// template <typename T>
-// void Vector<T>::sort(const Vector& v,bool (*pFunc)(T t1,T t2)) {
-
-// }
 #endif

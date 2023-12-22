@@ -4,6 +4,8 @@
 #include "Coach.h"
 #include "../CTDL/Vector.h"
 #include "../CTDL/DBLL.h"
+#include <thread>
+#include <chrono>
 #include <String.h>
 using namespace std;
 
@@ -41,8 +43,8 @@ public:
     void findPlayerById();
     void dkcDeleteTeamwithPlayer(String);
     void dkcDeleteTeamwithCoach(String);
-//    void deletePlayerById(ifstream &, ofstream &);
-//    void deleteCoachById(ifstream &, ofstream &);
+    //    void deletePlayerById(ifstream &, ofstream &);
+    //    void deleteCoachById(ifstream &, ofstream &);
     void deleteTeamById();
     void saveTeamToFile(ofstream &, int = 0);
     String getSizeTeamFromFile();
@@ -78,16 +80,19 @@ public:
     int getLoseGoal();
     void updateTeamAfterMatch(String, int, int, int);
     void addTeamFromFile();
-    void increaseNumberOfTeam(String,int = 1);
+    void increaseNumberOfTeam(String, int = 1);
     void addPlayerToTeam();
     String nameTeambyId(String);
     void showTeam();
+    void showTeam1();
     void showchampion();
+    Vector<String> nameChampion();
     void showNameTeam();
     // void setcolor(int);
     int getMaxIdFromFile();
     void showIDTeam();
-    void resetInforOfTeam(String,int,int);
+    void resetInforOfTeam(String, int, int);
+    void getnameteambyid();
 };
 
 #endif

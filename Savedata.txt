@@ -1,0 +1,168 @@
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam 1            2                                           4                     1                     3                     3                     1                     
+2             Indonesia             2                     Phan Van Tao          2                     1                     1                     3                     2                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     3                     
+3             Lao                   2                     Vo Chi Tung           1                     2                     -1                    0                     4                     
+4             Trung Quoc            2                     Nguyen Van Hieu       1                     4                     -3                    0                     5                     
+ID             The name Player    Date               Address            Age                NumberClother      YellowCard         RedCard            Goal               The name football  
+1              Huhuhu             12/02/2004         Hue                19                 1                  0                  0                  4                  Viet Nam 1         
+4              Vo Dinh Hai        13/04/2004         Lien Chieu         19                 4                  0                  0                  2                  Indonesia          
+6              Thai Viet Hung     03/05/2005         Hue                18                 6                  2                  0                  1                  Lao                
+7              Tran Vu Lam        26/12/2004         Que Son            18                 7                  0                  0                  1                  Trung Quoc         
+2              Nguyen Chung       13/06/2005         Hoa Cam            18                 2                  0                  0                  0                  Viet Nam 1         
+3              Ngo Van Danh       12/01/2004         Phu Ninh           19                 3                  0                  0                  0                  Indonesia          
+5              Dang Phuc Long     15/06/2004         Hue                19                 5                  0                  0                  0                  Lao                
+8              Le Nhat Minh       12/12/2002         Hue                21                 8                  0                  0                  0                  Trung Quoc         
+9              Le Anh Ngu         14/05/2006         Nui Thanh          17                 9                  0                  0                  0                  Han Quoc           
+10             Cao Thu Nga        14/09/2004         Dien Ban           19                 10                 0                  0                  0                  Han Quoc           
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID                     The name Coach                 Date                           Address                        Age                            The name football              
+1                      Dang Hoai Phuong               12/02/1990                     Da Nang                        33                             Viet Nam                       
+2                      Phan Thanh Tao                 14/02/1967                     Da Nang                        56                             Indonesia                      
+3                      Vo Chi Tung                    12/04/1968                     Dien Ban                       55                             Lao                            
+4                      Nguyen Van Hieu                12/03/1994                     Hiep Duc                       29                             Trung Quoc                     
+5                      Pham Cong Thang                23/02/1978                     Hai Chau                       45                             Han Quoc                       
+ID             The name Player    Date               Address            Age                NumberClother      YellowCard         RedCard            Goal               The name football  
+1              Truong Cong Bao    12/02/2004         Hue                19                 1                  0                  0                  0                  Viet Nam           
+2              Nguyen Chung       13/06/2005         Hoa Cam            18                 2                  0                  0                  0                  Viet Nam           
+3              Ngo Van Danh       12/01/2004         Phu Ninh           19                 3                  0                  0                  0                  Indonesia          
+4              Vo Dinh Hai        13/04/2004         Lien Chieu         19                 4                  0                  0                  0                  Indonesia          
+5              Dang Phuc Long     15/06/2004         Hue                19                 5                  0                  0                  0                  Lao                
+6              Thai Viet Hung     03/05/2005         Hue                18                 6                  0                  0                  0                  Lao                
+7              Tran Vu Lam        26/12/2004         Que Son            18                 7                  0                  0                  0                  Trung Quoc         
+8              Le Nhat Minh       12/12/2002         Hue                21                 8                  0                  0                  0                  Trung Quoc         
+9              Le Anh Ngu         14/05/2006         Nui Thanh          17                 9                  0                  0                  0                  Han Quoc           
+10             Cao Thu Nga        14/09/2004         Dien Ban           19                 10                 0                  0                  0                  Han Quoc           
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   1                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     
+ID            The name Team         Player                The name Coach        Goal                  LoseGoal              Difference            Point                 Rank                  
+1             Viet Nam              2                     Dang Hoai Phuong      0                     0                     0                     0                     1                     
+2             Indonesia             2                     Phan Thanh Tao        0                     0                     0                     0                     1                     
+3             Lao                   2                     Vo Chi Tung           0                     0                     0                     0                     1                     
+4             Trung Quoc            2                     Nguyen Van Hieu       0                     0                     0                     0                     1                     
+5             Han Quoc              2                     Pham Cong Thang       0                     0                     0                     0                     1                     

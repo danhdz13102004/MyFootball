@@ -13,32 +13,33 @@ Match::~Match()
 }
 Match::Match(const Team &a, const Team &b, String address, String time, String date)
 {
-    cout << "Constructor of Match" << endl;
+    // cout << "Constructor of Match" << endl;
     this->v.push_back(a);
     this->v.push_back(b);
     this->address = address;
     this->time = time;
     this->date = date;
-    cout << "Khoi tao thanh cong" << endl;
+    // cout << "Create success" << endl;
 }
 
 void Match::showMatch()
 {
     this_thread::sleep_for(chrono::milliseconds(100));
     String idR = this->idRound;
-    if(idR.size() == 1) idR = String("0") + idR;
+    if (idR.size() == 1)
+        idR = String("0") + idR;
     int id = String::toint(idR);
-    String tmp("Vong dau so ");
+    String tmp("Number round ");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), id);
     printCentered(tmp + idR);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     String tmp1("                        ");
-    String tmp2("DIEN RA TAI SVD: ");
+    String tmp2("Location: ");
     String s = tmp2 + this->address;
     printCentered(drawBorder(70));
-    printCentered(drawOptionCenter(addSpace(this->v[0].getNameFootballTeam(), this->v[1].getNameFootballTeam(),42),70));
-    printCentered(drawOptionCenter(addSpace(this->time,this->date,42),70));
-    printCentered(drawOptionCenter(s,70));
+    printCentered(drawOptionCenter(addSpace(this->v[0].getNameFootballTeam(), this->v[1].getNameFootballTeam(), 42), 70));
+    printCentered(drawOptionCenter(addSpace(this->time, this->date, 42), 70));
+    printCentered(drawOptionCenter(s, 70));
     printCentered(drawBorder(70));
     cout << endl;
 }
@@ -167,13 +168,13 @@ void Match::findMatchByIdTeam()
 {
     system("cls");
     bool kt = true;
-    cout << "QUAN LY GIAI DAU/Truy van thong tin tran dau/Truy van thong tin tran dau theo ID doi" << endl
+    cout << "LEAGUE MANAGEMENT/Query information for match/By team ID" << endl
          << endl;
-    cout << "Giai dau co cac doi bong co ID sau:" << endl;
+    cout << "The league includes teams with the following ID:" << endl;
     Team t;
     t.showIDTeam();
     cout << endl;
-    cout << "Nhap ID doi can tim: ";
+    cout << "Enter the ID: ";
     String idFind;
     String::getline(cin, idFind);
     ifstream f("Schedule.txt");
@@ -236,15 +237,19 @@ void Match::findMatchByIdTeam()
         }
     }
     if (kt)
-        cout << "Khong tim thay tran dau nao" << endl;
-    cout << "Nhan Enter de tiep tuc . .";
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found" << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
+    cout << "Press the Enter key to continue . .";
     getchar();
 }
 
 DBLL<Match> Match::getListMatchByIdTeam()
 {
     bool val = true;
-    cout << "Nhap ID doi can tim: ";
+    cout << "Enter the ID team: ";
     String idFind;
     String::getline(cin, idFind);
     DBLL<Match> v;
@@ -309,7 +314,7 @@ DBLL<Match> Match::getListMatchByIdTeam()
         }
     }
     if (val)
-        cout << "Khong tim thay tran dau nao! " << endl;
+        cout << "Not found! " << endl;
     return v;
 }
 
@@ -371,12 +376,12 @@ void Match::findMatchByDay()
 {
     system("cls");
     bool val = true;
-    cout << "QUAN LY GIAI DAU/Truy van thong tin tran dau/Truy van thong tin tran dau theo ngay" << endl
+    cout << "LEAGUE MANAGEMENT/Query information for match/By date" << endl
          << endl;
-    cout << "Lich thi dau cua cac doi bong dien ra trong cac ngay sau: " << endl;
+    cout << "The team match schedule takes place on the following days: " << endl;
     showdate();
     cout << endl;
-    cout << "Nhap ngay can tim (dd/mm/yyyy): ";
+    cout << "Enter the date (dd/mm/yyyy): ";
     String dayFind;
     String::getline(cin, dayFind);
     dayFind = String::standadizeDay(dayFind);
@@ -440,8 +445,12 @@ void Match::findMatchByDay()
         }
     }
     if (val)
-        cout << "Khong tim thay tran dau nao! " << endl;
-    cout << "Nhan Enter de tiep tuc . .";
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found! " << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
+    cout << "Press the Enter key to continue . .";
     getchar();
 }
 
@@ -449,13 +458,13 @@ void Match::findMatchByNameTeam()
 {
     system("cls");
     bool val = true;
-    cout << "QUAN LY GIAI DAU/Truy van thong tin tran dau/Truy van thong tin tran dau theo ten 1 doi" << endl
+    cout << "LEAGUE MANAGEMENT/Query information for match/By the name of a team" << endl
          << endl;
-    cout << "Giai dau co cac doi bong co ten sau:" << endl;
+    cout << "The league includes the following named teams:" << endl;
     Team t;
     t.showNameTeam();
     cout << endl;
-    cout << "Nhap ten doi bong can tim: ";
+    cout << "Enter the team name: ";
     String nameTeamFind;
     String::getline(cin, nameTeamFind);
     nameTeamFind = String::standadizeString(nameTeamFind);
@@ -519,8 +528,84 @@ void Match::findMatchByNameTeam()
         }
     }
     if (val)
-        cout << "Khong tim thay tran dau nao! " << endl;
-    cout << "Nhan Enter de tiep tuc . .";
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found! " << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
+    cout << "Press the Enter key to continue . .";
+    getchar();
+}
+
+void Match::findallmatch()
+{
+    system("cls");
+    bool val = true;
+    cout << "LEAGUE MANAGEMENT/Query information for match/Query information for all matches" << endl
+         << endl;
+    ifstream f("Schedule.txt");
+    if (f.is_open())
+    {
+        String tmp;
+        String::getline(f, tmp);
+        while (!f.eof())
+        {
+            String tmp;
+            String::getline(f, tmp);
+            if (String::toint(tmp[0]) != 0)
+            {
+                int check = 1;
+                bool status = false;
+                String idRound, idTeam1, idTeam2, time, date, address;
+                for (int i = 0; i < tmp.size(); i++)
+                {
+                    if (tmp[i] != ' ')
+                        status = true;
+                    if (tmp[i] == ',')
+                    {
+                        status = false;
+                        check++;
+                        continue;
+                    }
+                    if (check == 1 && status)
+                        idRound = idRound + tmp[i];
+                    else if (check == 2 && status)
+                        idTeam1 = idTeam1 + tmp[i];
+                    else if (check == 3 && status)
+                        idTeam2 = idTeam2 + tmp[i];
+                    else if (check == 4 && status)
+                        time = time + tmp[i];
+                    else if (check == 5 && status)
+                        date = date + tmp[i];
+                    else if (check == 6 && status)
+                    {
+                        address = address + tmp[i];
+                        if ((tmp[i + 1] == ' ' && tmp[i + 2] == ' ') || (tmp[i + 1] == ' ' && i + 1 == tmp.size() - 1))
+                            break;
+                    }
+                }
+                Team myT;
+                Team t1 = myT.getTeamById(idTeam1);
+                Team t2 = myT.getTeamById(idTeam2);
+                Match m;
+                m.setAddress(address);
+                m.setTime(time);
+                m.setDate(date);
+                m.setIdRound(idRound);
+                m.addTeam(t1);
+                m.addTeam(t2);
+                m.showMatch();
+                val = false;
+            }
+        }
+    }
+    if (val)
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found! " << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
+    cout << "Press the Enter key to continue . .";
     getchar();
 }
 
@@ -528,17 +613,17 @@ void Match::findMatchByTwoNameTeam()
 {
     system("cls");
     bool val = true;
-    cout << "QUAN LY GIAI DAU/Truy van thong tin tran dau/Truy van thong tin tran dau theo ten 2 doi" << endl
+    cout << "LEAGUE MANAGEMENT/Query information for match/By the names of two teams" << endl
          << endl;
-    cout << "Giai dau gom cac doi bong co ten sau: " << endl;
+    cout << "The league includes the following named teams: " << endl;
     Team t;
     t.showNameTeam();
     cout << endl;
-    cout << "Nhap ten doi thu nhat: ";
+    cout << "Enter the team name 1: ";
     String nameTeam1;
     String::getline(cin, nameTeam1);
     nameTeam1 = String::standadizeString(nameTeam1);
-    cout << "Nhap ten doi thu hai: ";
+    cout << "Enter the team name 2: ";
     String nameTeam2;
     String::getline(cin, nameTeam2);
     nameTeam2 = String::standadizeString(nameTeam2);
@@ -602,8 +687,12 @@ void Match::findMatchByTwoNameTeam()
         }
     }
     if (val)
-        cout << "Khong tim thay tran dau nao! " << endl;
-    cout << "Nhan Enter de tiep tuc . .";
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+        cout << "Not found! " << endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    }
+    cout << "Press the Enter key to continue . .";
     getchar();
 }
 Match Match::getMatchByIdRoundAndIdTwoTeam(String idR, String id1, String id2)
@@ -673,7 +762,7 @@ Match Match::getMatchByIdRoundAndIdTwoTeam(String idR, String id1, String id2)
     Match m;
     m.setIdRound("0");
     if (val)
-        cout << "Khong tim thay tran dau nao!";
+        cout << "Not found!";
     return m;
 }
 void Match::updateMatch(String t, Match m1, int checkCase, String td)
@@ -771,7 +860,14 @@ void Match::showschedule()
     int dem = 0;
     String::getline(file, tmp);
     String kt = " ";
-    cout << left << setw(15) << "ROUND" << setw(20) << "NAME TEAM 1" << setw(20) << "NAME TEAM 2" << setw(20) << "TIME" << setw(25) << "DATE" << setw(20) << "ADDRESS" << endl;
+    String r = "Round", name1 = "The team name 1", name2 = "The team name 2", ti = "Time", da = "Date", add = "Address";
+    int console = 110;
+    int colum = (console - r.size() - name1.size() - name2.size() - ti.size() - da.size() - add.size()) / 2;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+    printCentered(drawBorder(202));
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+    cout << setw(colum) << r << setw(colum) << name1 << setw(colum) << name2 << setw(colum) << ti << setw(colum) << da << setw(colum) << add << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     while (!file.eof())
     {
         String tmp;
@@ -808,19 +904,24 @@ void Match::showschedule()
                         break;
                 }
             }
-            if(String::toint(idRound)%2!=0) {
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-            }
-            else {
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-            }
-            Team t1,t2;
+            // if (String::toint(idRound) % 2 != 0)
+            // {
+            //     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            // }
+            // else
+            // {
+            //     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            // }
+            Team t1, t2;
             t1 = t1.getTeamById(idTeam1);
             t2 = t2.getTeamById(idTeam2);
-
-            cout << left << setw(15) << idRound  << setw(20) << t1.getNameFootballTeam() << setw(20) << t2.getNameFootballTeam() << setw(20) << time  << setw(25) << date << setw(20) << address << endl;
+            this_thread::sleep_for(chrono::milliseconds(100));
+            cout << setw(colum) << idRound << setw(colum) << t1.getNameFootballTeam() << setw(colum) << t2.getNameFootballTeam() << setw(colum) << time << setw(colum) << date << setw(colum) << address << endl;
         }
     }
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+    printCentered(drawBorder(202));
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     file.close();
 }
@@ -828,21 +929,26 @@ void Match::showschedule()
 void Match::updateInforOfMatch()
 {
     system("cls");
-    String idRound, idTeam1, idTeam2;
-    cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau" << endl
+    String idRound, name1t, name2t, name1, name2, idTeam1, idTeam2;
+    cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information" << endl
          << endl;
     showschedule();
     cout << endl;
-    cout << "Nhap so vong dau: ";
+    cout << "Enter the number of rounds: ";
     String::getline(cin, idRound);
-    cout << "Nhap id doi thu nhat: ";
-    String::getline(cin, idTeam1);
-    cout << "Nhap id doi thu hai: ";
-    String::getline(cin, idTeam2);
+    cout << "Enter the name team 1: ";
+    String::getline(cin, name1t);
+    cout << "Enter the name team 2: ";
+    String::getline(cin, name2t);
+    name1 = String::standadizeString(name1t);
+    name2 = String::standadizeString(name2t);
+    Team t;
+    idTeam1 = t.getIdByNameTeam(name1);
+    idTeam2 = t.getIdByNameTeam(name2);
     if (checkMatch(idRound, idTeam1, idTeam2))
     {
-        cout << "Khong tim thay tran dau nao" << endl;
-        cout << "Nhan Enter de tiep tuc . .";
+        cout << "Not found" << endl;
+        cout << "Press the Enter key to continue . .";
         getchar();
         return;
     }
@@ -851,33 +957,25 @@ void Match::updateInforOfMatch()
     do
     {
         system("cls");
-        // cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau" << endl
-        //      << endl;
-        // cout << "1. Thay doi thoi gian thi dau." << endl;
-        // cout << "2. Thay doi ngay thi dau." << endl;
-        // cout << "3. Thay doi thoi gian va ngay thi dau." << endl;
-        // cout << "4. Thay doi dia diem thi dau." << endl;
-        // cout << "0. Thoat." << endl;
-        // cout << "Xin moi nhap lua chon: ";
-        printCentered("QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau");
-        cout << endl;
+        cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information" << endl
+             << endl;
         printCentered(drawBorder(50));
-        printCentered(drawOption("1. Thay doi thoi gian thi dau.", 50));
-        printCentered(drawOption("2. Thay doi ngay thi dau.", 50));
-        printCentered(drawOption("3. Thay doi thoi gian va ngay thi dau.", 50));
-        printCentered(drawOption("4. Thay doi dia diem thi dau.", 50));
-        printCentered(drawOption("0. Thoat.", 50));
+        printCentered(drawOption("1. Time.", 50));
+        printCentered(drawOption("2. Date.", 50));
+        printCentered(drawOption("3. Time and Date.", 50));
+        printCentered(drawOption("4. Location.", 50));
+        printCentered(drawOption("0. Back.", 50));
         printCentered(drawBorder(50));
-        printCentered("Nhap lua chon cua ban: ", 0);
+        printCentered("Please enter your choice: ", 0);
         cin >> lc;
         cin.ignore();
         system("cls");
         if (lc == 1)
         {
             system("cls");
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau/Thay doi thoi gian thi dau" << endl
+            cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information/Time" << endl
                  << endl;
-            cout << "Nhap thoi gian thi dau moi: ";
+            cout << "Enter the new time: ";
             String timeNew;
             String::getline(cin, timeNew);
             this->updateMatch(timeNew, m, 0);
@@ -885,9 +983,9 @@ void Match::updateInforOfMatch()
         else if (lc == 2)
         {
             system("cls");
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau/Thay doi ngay thi dau" << endl
+            cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information/Date" << endl
                  << endl;
-            cout << "Nhap ngay thi dau moi (dd/mm/yyyy): ";
+            cout << "Enter the new date (dd/mm/yyyy): ";
             String dateNew;
             String::getline(cin, dateNew);
             if (dateNew[1] == '/')
@@ -902,12 +1000,12 @@ void Match::updateInforOfMatch()
         else if (lc == 3)
         {
             system("cls");
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau/Thay doi thoi gian va ngay thi dau" << endl
+            cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information/Time and Date" << endl
                  << endl;
             String timeNew, dateNew;
-            cout << "Nhap thoi gian thi dau moi: ";
+            cout << "Enter the new time: ";
             String::getline(cin, timeNew);
-            cout << "Nhap ngay thi dau moi (dd/mm/yyyy): ";
+            cout << "Enter the new date (dd/mm/yyyy): ";
             String::getline(cin, dateNew);
             if (dateNew[1] == '/')
             {
@@ -921,21 +1019,21 @@ void Match::updateInforOfMatch()
         else if (lc == 4)
         {
             system("cls");
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Chinh sua thong tin tran dau/Thay doi dia diem thi dau" << endl
+            cout << "LEAGUE MANAGEMENT/Update information for match/Edit match information/Location" << endl
                  << endl;
             String addressNew;
-            cout << "Nhap dia chi thi dau moi: ";
+            cout << "Enter the new location: ";
             String::getline(cin, addressNew);
             this->updateMatch(addressNew, m, 3);
         }
         if (lc != 0)
         {
-            cout << "Nhan Enter de tiep tuc ..";
+            cout << "Press the Enter key to continue . .";
             getchar();
         }
     } while (lc != 0);
-    cout << "Cap nhat thong tin tran dau thanh cong" << endl;
-    cout << "Nhan phim bat ki de tiep tuc .." << endl;
+    cout << "Update successful" << endl;
+    cout << "Press the Enter key to continue . ." << endl;
 }
 
 void Match::deleteMatchByIdRoundAndTwoTeam(Match &m1)
@@ -1127,7 +1225,13 @@ void Match::showPlayerofTeam(String nameTeam)
 {
     Team t;
     t.setListMember(t.getListPlayerByNameFootballTeam(nameTeam));
-    cout << left << setw(10) << "ID" << setw(15) << "Ten cau thu" << setw(15) << "Ngay sinh" << setw(20) << "Dia chi" << setw(10) << "Tuoi" << setw(15) << "So ao" << setw(15) << "The vang" << setw(10) << "The do" << setw(10) << "Ban thang" << setw(20) << "Ten doi bong" << endl;
+    String id = "ID", tenct = "The name Player", date = "Date", add = "Address", age = "Age", numberclo = "NumberClother", yl = "YellowCard", r = "RedCard", goal = "Goal", namefb = "The name football";
+    int console = 120;
+    int colum = (console - id.size() - tenct.size() - date.size() - add.size() - age.size() - numberclo.size() - yl.size() - r.size() - goal.size() - namefb.size()) / 2;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+    cout << setw(colum - 4) << id << setw(colum) << tenct << setw(colum) << date << setw(colum) << add << setw(colum) << age << setw(colum) << numberclo << setw(colum) << yl << setw(colum) << r << setw(colum) << goal << setw(colum) << namefb << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    // cout << left << setw(10) << "ID" << setw(25) << "Ten cau thu" << setw(17) << "Ngay sinh" << setw(15) << "Dia chi" << setw(15) << "Tuoi" << setw(15) << "So ao" << setw(15) << "The vang" << setw(15) << "The do" << setw(15) << "Ban thang" << setw(15) << "Ten doi bong" << endl;
     for (int i = 0; i < t.getlistMember().size(); i++)
     {
         t.getlistMember()[i].show2();
@@ -1137,7 +1241,7 @@ void Match::showPlayerofTeam(String nameTeam)
 String Match::returnNameTeamByID(String Id)
 {
     ifstream i("Team.txt");
-    String a = "Khong tim thay ID doi bong";
+    String a = "Not found";
     if (i.is_open())
     {
         String tmp;
@@ -1263,26 +1367,28 @@ void Match::enterResultMatch()
     // map<pair<String, String>, int> goalsByPlayer;
     system("cls");
     String idvong, id1, id2;
-    String nameTeam1,nameTeam2;
-    Team t1,t2;
-    cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Them ket qua cho tran dau" << endl
+    String nameTeam1t, nameTeam2t, nameTeam1, nameTeam2;
+    Team t1, t2;
+    cout << "LEAGUE MANAGEMENT/Update information for match/Add results for the match" << endl
          << endl;
     showschedule();
     cout << endl;
     cout << "Enter ID Round: ";
     String::getline(cin, idvong);
     cout << "Enter NameTeam 1: ";
-    String::getline(cin, nameTeam1);
+    String::getline(cin, nameTeam1t);
     cout << "Enter NameTeam 2: ";
-    String::getline(cin, nameTeam2);
+    String::getline(cin, nameTeam2t);
+    nameTeam1 = String::standadizeString(nameTeam1t);
+    nameTeam2 = String::standadizeString(nameTeam2t);
     t1 = t1.getTeamByName(nameTeam1);
-    t2  = t2.getTeamByName(nameTeam2);
+    t2 = t2.getTeamByName(nameTeam2);
     id1 = t1.getIdTeam();
     id2 = t2.getIdTeam();
     if (checkMatch(idvong, id1, id2))
     {
-        cout << "Khong tim thay tran dau nao!" << endl;
-        cout << "Nhan Enter de tiep tuc . .";
+        cout << "Not found!" << endl;
+        cout << "Press the Enter key to continue . .";
         getchar();
         return;
     }
@@ -1291,34 +1397,48 @@ void Match::enterResultMatch()
     Match m = Match::getMatchByIdRoundAndIdTwoTeam(idvong, id1, id2);
     int lc;
     int g1, g2;
-    cout << "Nhap so ban thang cua doi thu nhat: ";
+    cout << "Enter the goal of team 1: ";
     cin >> g1;
-    cout << "Nhap so ban thang cua doi thu hai: ";
+    cout << "Enter the goal of team 2: ";
     cin >> g2;
     cin.ignore();
     String idm, idh, goal1, goal2;
-    cout << "Danh sach cau thu cua doi bong co ID la " << id1 << " (" << name1 << ")" << endl;
+    cout << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+    printCentered(drawBorder(202));
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    cout << "List of team's players with ID " << id1 << " (" << name1 << "):" << endl;
     showPlayerofTeam(name1);
     cout << endl;
-    cout << "Danh sach cau thu cua doi bong co ID la " << id2 << " (" << name2 << ")" << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+    printCentered(drawBorder(202));
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    cout << "List of team's players with ID " << id2 << " (" << name2 << "):" << endl;
     showPlayerofTeam(name2);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+    printCentered(drawBorder(202));
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int kiemtra = 0;
     int sum = g1 + g2;
     int dem1 = 0, dem2 = 0;
-    cout << "Luu y: So ban thang cho tung cau thu phai bang tong so ban thang cua 2 doi da ghi ban trong tran dau!" << endl;
+    cout << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+    cout << "Note: The number of goals for each player must be equal to the total number of goals scored by the two teams in the match!" << endl
+         << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int goal1Int, goal2Int;
     ofstream f("SavePlayer.txt", std::ios::app);
     do
     {
-        if (g1 > 0 && dem1 < g1)
+        while (g1 > 0 && dem1 < g1)
         {
             do
             {
-                cout << "Nhap ID cau thu ghi ban cho doi " << name1 << ": ";
+                cout << "Enter the citizen identification card of the player who scored a goal for the " << name1 << ": ";
                 String::getline(cin, idm);
                 if (checkidPlayerofTeam(id1, idm))
                 {
-                    cout << "Nhap so ban thang (toi da " << g1 - dem1 << " ban): ";
+                    cout << "Enter the goal (Maximum " << g1 - dem1 << " goal): ";
                     String::getline(cin, goal1);
                     goal1Int = String::toint(goal1);
 
@@ -1331,34 +1451,28 @@ void Match::enterResultMatch()
                     }
                     else
                     {
-                        cout << "So ban thang nhap vao khong hop le. Vui long nhap lai." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        cout << "The number of goals entered is invalid. Please re-enter" << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                     }
                 }
                 else
                 {
-                    cout << "Cau thu co ID " << idm << " khong ton tai trong doi bong " << name1 << ". Vui long nhap lai." << endl;
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                    cout << "Players have citizen identification cards " << idm << " not found " << name1 << ". Please re-enter." << endl;
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                 }
             } while (!checkidPlayerofTeam(id1, idm));
-            // for (const auto &entry : goalsByPlayer)
-            // {
-            //     const auto &playerKey = entry.first;
-            //     const String &teamId = playerKey.first;
-            //     const String &playerId = playerKey.second;
-            //     int goalsScored = entry.second;
-            //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
-            //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
-            // }
         }
-
-        if (g2 > 0 && dem2 < g2)
+        while (g2 > 0 && dem2 < g2)
         {
             do
             {
-                cout << "Nhap ID cau thu ghi ban cho doi " << name2 << ": ";
+                cout << "Enter the citizen identification card of the player who scored a goal for the " << name2 << ": ";
                 String::getline(cin, idh);
                 if (checkidPlayerofTeam(id2, idh))
                 {
-                    cout << "Nhap so ban thang (toi da " << g2 - dem2 << " ban): ";
+                    cout << "Enter the goal (Maximum " << g2 - dem2 << " goal): ";
                     String::getline(cin, goal2);
                     goal2Int = String::toint(goal2);
 
@@ -1371,23 +1485,18 @@ void Match::enterResultMatch()
                     }
                     else
                     {
-                        cout << "So ban thang nhap vao khong hop le. Vui long nhap lai." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        cout << "The number of goals entered is invalid. Please re-enter." << endl;
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                     }
                 }
                 else
                 {
-                    cout << "Cau thu co ID " << idh << " khong ton tai trong doi bong " << name2 << ". Vui long nhap lai." << endl;
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                    cout << "Players have citizen identification cards " << idh << " not found " << name2 << ". Please re-enter." << endl;
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
                 }
             } while (!checkidPlayerofTeam(id2, idh));
-            // for (const auto &entry : goalsByPlayer)
-            // {
-            //     const auto &playerKey = entry.first;
-            //     const String &teamId = playerKey.first;
-            //     const String &playerId = playerKey.second;
-            //     int goalsScored = entry.second;
-            //     cout << "Cau thu " << playerId << " cua doi " << teamId << " ghi duoc " << goalsScored << " ban." << endl;
-            //     Player::updatePlayerAfterMatch(playerId, 0, 0, goalsScored);
-            // }
         }
     } while (kiemtra != sum);
     for (int i = 0; i < maxplayer; ++i)
@@ -1395,7 +1504,8 @@ void Match::enterResultMatch()
         if (goalsByPlayer[i][0] > 0 || goalsByPlayer[i][1] > 0)
         {
             int m = max(goalsByPlayer[i][0], goalsByPlayer[i][1]);
-            cout << "Cau thu co ID " << i << " ghi duoc " << m << " ban thang." << endl;
+            Player p;
+            cout << "Players have the name " << p.getnamebyid(String::tostring(i)) << " score " << m << " goal." << endl;
             if (checkidPlayerofTeam(id1, String::tostring(i)) == true)
                 f << left << setw(10) << idvong + "," << setw(10) << id1 + "," << setw(15) << returnNameTeamByID(id1) + "," << setw(10) << String::tostring(i) + "," << setw(10) << String::tostring(m) << endl;
             else
@@ -1425,83 +1535,99 @@ void Match::enterResultMatch()
     }
     m.deleteMatchByIdRoundAndTwoTeam(m);
     m.saveToHistoryMatch(id1, id2, g1, g2);
-    cout << "Nhan Enter de tiep tuc . .";
+    cout << "Press the Enter key to continue . .";
     getchar();
     do
     {
         system("cls");
-        // cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Them ket qua cho tran dau" << endl
-        //      << endl;
-        // cout << "1. Nhap the vang cho cau thu" << endl;
-        // cout << "2. Nhap the do cho cau thu" << endl;
-        // cout << "0. Quay lai" << endl;
-        // cout << "Nhap lua chon: ";
-        printCentered("QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Them ket qua cho tran dau");
+        printCentered("LEAGUE MANAGEMENT/Update information for match/Add results for the match");
         cout << endl;
         printCentered(drawBorder(50));
-        printCentered(drawOption("1. Nhap the vang cho cau thu.", 50));
-        printCentered(drawOption("2. Nhap the do cho cau thu.", 50));
-        printCentered(drawOption("0. Thoat.", 50));
+        printCentered(drawOption("1. Enter the yellow card.", 50));
+        printCentered(drawOption("2. Enter the red card.", 50));
+        printCentered(drawOption("0. Back.", 50));
         printCentered(drawBorder(50));
-        printCentered("Nhap lua chon cua ban: ", 0);
+        printCentered("Please enter your choice: ", 0);
         cin >> lc;
         cin.ignore();
         if (lc == 1)
         {
             system("cls");
             String id, numYlCard;
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Them ket qua cho tran dau/Nhap the vang cho cau thu" << endl
-                 << endl;
-            cout << "Danh sach cau thu cua doi bong co ID la " << id1 << " (" << name1 << ")" << endl;
+            printCentered("LEAGUE MANAGEMENT/Update information for match/Add results for the match/Enter the yellow card");
+            cout << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "List of players of the team with ID " << id1 << " (" << name1 << ")" << endl;
             showPlayerofTeam(name1);
             cout << endl;
-            cout << "Danh sach cau thu cua doi bong co ID la " << id2 << " (" << name2 << ")" << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "List of players of the team with ID " << id2 << " (" << name2 << ")" << endl;
             showPlayerofTeam(name2);
-            cout << "Nhap ID cau thu bi the vang: ";
+            cout << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "Enter citizen identification card of player: ";
             String::getline(cin, id);
             if (checkPlayer(id) == false)
             {
-
-                cout << "Nhap so the vang: ";
+                cout << "Enter the yellow card: ";
                 String::getline(cin, numYlCard);
                 Player::updatePlayerAfterMatch(id, String::toint(numYlCard), 0, 0);
             }
             else
             {
-                cout << "Cau thu co ID " << id << " khong ton tai" << endl;
-                cout << "Nhan Enter de tiep tuc . .";
+                cout << "Players have citizen identification cards " << id << " not found" << endl;
+                cout << "Press the Enter key to continue . .";
                 getchar();
             }
         }
         else if (lc == 2)
         {
             system("cls");
-            String id;
-            cout << "QUAN LY GIAI DAU/Cap nhat thong tin tran dau/Them ket qua cho tran dau/Nhap the do cho cau thu" << endl
-                 << endl;
-            cout << "Danh sach cau thu cua doi bong co ID la " << id1 << " (" << name1 << ")" << endl;
+            String id, numRedCard;
+            printCentered("LEAGUE MANAGEMENT/Update information for match/Add results for the match/Enter the red card");
+            cout << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "List of players of the team with ID " << id1 << " (" << name1 << ")" << endl;
             showPlayerofTeam(name1);
             cout << endl;
-            cout << "Danh sach cau thu cua doi bong co ID la " << id2 << " (" << name2 << ")" << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "List of players of the team with ID " << id2 << " (" << name2 << ")" << endl;
             showPlayerofTeam(name2);
-            cout << "Nhap ID cau thu bi the do: ";
+            cout << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+            printCentered(drawBorder(202));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "Enter citizen identification card of player: ";
             String::getline(cin, id);
             if (checkPlayer(id) == false)
             {
-                Player::updatePlayerAfterMatch(id, 0, 1, 0);
+                cout << "Enter the red card: ";
+                String::getline(cin, numRedCard);
+                Player::updatePlayerAfterMatch(id, String::toint(numRedCard), 0, 0);
             }
             else
             {
-                cout << "Cau thu co ID " << id << " khong ton tai" << endl;
-                cout << "Nhan Enter de tiep tuc . .";
+                cout << "Players have citizen identification cards " << id << " not found" << endl;
+                cout << "Press the Enter key to continue . .";
                 getchar();
             }
         }
     } while (lc != 0);
-    cout << "Them ket qua thanh cong" << endl;
-    cout << "Nhan Enter de tiep tuc . ." << endl;
+    cout << "Add result success" << endl;
+    cout << "Press the Enter key to continue . .";
     getchar();
 }
+
 void Match::saveToHistoryMatch(String idT1, String idT2, int g1, int g2)
 {
     ofstream o("HistoryMatch.txt", ios::app);
@@ -1535,10 +1661,13 @@ String Match::getIdTeam2()
 {
     return this->v[1].getIdTeam();
 }
-Match Match::getMatchFromHistoryMatch(String idRound,String idTeam1,String idTeam2) {
+Match Match::getMatchFromHistoryMatch(String idRound, String idTeam1, String idTeam2)
+{
     ifstream file("HistoryMatch.txt");
     String tmp;
+    Match x;
     String::getline(file, tmp);
+    // cout << left << setw(7) << "Vong" << setw(10) << "ID doi 1" << setw(17) << "Ten doi 1" << setw(17) << "Ban thang doi 1" << setw(12) << "ID doi 2" << setw(17) << "Ten doi 2" << setw(17) << "Ban thang doi 2" << setw(17) << "Thoi gian" << setw(20) << "Ngay thang nam" << setw(20) << "Dia diem" << endl;
     while (!file.eof())
     {
         String::getline(file, tmp);
@@ -1580,13 +1709,15 @@ Match Match::getMatchFromHistoryMatch(String idRound,String idTeam1,String idTea
                     break;
             }
         }
-       if(idRound == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1)){
-            Team t1,t2;
+        if (idRound == idr && ((id1 == idTeam1 && id2 == idTeam2) || id1 == idTeam2 && id2 == idTeam1))
+        {
+            Team t1, t2;
             t1 = t1.getTeamById(idTeam1);
             t2 = t2.getTeamById(idTeam2);
-            Match m(t1,t2,address,time,date);
+            Match m(t1, t2, address, time, date);
             m.setIdRound(idr);
             return m;
-       }
+        }
     }
+    return x;
 }

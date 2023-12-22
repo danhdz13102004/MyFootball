@@ -67,10 +67,10 @@ public:
         if (pos > s)
             pos = s; // Neu vi tri chen lon hon kich thuoc cua chuoi thi chen vo cuoi
         size_t newLen = s + str.s;
-        char *newStr = new char[newLen + 1]; // Copy all ky tu tu m den pos vo chuoi moi
-        strncpy(newStr, m, pos);             // Copy all ky tu tu str.m vao chuoi moi
-        strncpy(newStr + pos, str.m, str.s); // Copy all ky tu con lai
-        strcpy(newStr + pos + str.s, m + pos);
+        char *newStr = new char[newLen + 1];
+        strncpy(newStr, m, pos);               // Copy all ky tu tu m den pos vo chuoi moi
+        strncpy(newStr + pos, str.m, str.s);   // Copy all ky tu tu str.m vao chuoi moi
+        strcpy(newStr + pos + str.s, m + pos); // Copy all ky tu con lai
         delete[] m;
         m = newStr;
         s = newLen;
@@ -92,6 +92,7 @@ public:
     {
         return s;
     }
+
     // template<typename T>
     String operator+(const String &other) const
     {
@@ -186,10 +187,6 @@ public:
         {
             if (s[i] >= '0' && s[i] <= '9')
                 result = result * 10 + (s[i] - '0');
-            else
-            {
-                // exception cho ni
-            }
         }
         return result * sign;
     }
